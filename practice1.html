@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OOPS Quiz</title>
+
+<script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#e8f0fe;
+    display:flex; 
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+
+.quiz-box{
+    width:650px;
+    background:white;
+    padding:25px;
+    border-radius:10px;
+    box-shadow:0 5px 15px rgba(0,0,0,.3);
+}
+
+h1{
+    text-align:center;
+    color:#1e3a8a;
+    margin-bottom:15px;
+}
+
+.info{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:20px;
+    font-weight:bold;
+    color:#444;
+}
+
+.question{
+    font-size:20px;
+    margin-bottom:20px;
+}
+
+.option{
+    background:#f5f5f5;
+    padding:12px;
+    margin:10px 0;
+    border-radius:8px;
+    cursor:pointer;
+    transition:.3s;
+    border:2px solid transparent;
+}
+
+.option:hover{
+    background:#dbeafe;
+    border-color:#2563eb;
+}
+
+button{
+    margin-top:20px;
+    width:100%;
+    padding:12px;
+    background:#2563eb;
+    color:white;
+    border:none;
+    border-radius:8px;
+    font-size:17px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#1d4ed8;
+}
+
+.result{
+    text-align:center;
+}
+
+.result h2{
+    margin:20px;
+    color:green;
+}
+</style>
+</head>
+
+<body>
+
+<div id="root"></div>
+
+<script type="text/babel">
+
+function QuizApp(){
+
+const questions=[
+{
+question:"1. What is the full form of OOP?",
+options:[
+"Object Oriented Programming",
+"Only Object Program",
+"Object Oriented Process",
+"Object Operation Programming"
+],
+answer:"Object Oriented Programming"
+},
+{
+question:"2. Which feature hides internal details?",
+options:[
+"Inheritance",
+"Encapsulation",
+"Polymorphism",
+"Abstraction"
+],
+answer:"Abstraction"
+},
+{
+question:"3. Which keyword is used to inherit a class in C++?",
+options:[
+"extends",
+"inherits",
+":",
+"super"
+],
+answer:":"
+},
+{
+question:"4. Which concept allows one interface with many implementations?",
+options:[
+"Encapsulation",
+"Inheritance",
+"Polymorphism",
+"Class"
+],
+answer:"Polymorphism"
+},
+{
+question:"5. A blueprint for creating objects is called?",
+options:[
+"Method",
+"Class",
+"Constructor",
+"Function"
+],
+answer:"Class"
+},
+{
+question:"6. Which function has the same name as the class?",
+options:[
+"Destructor",
+"Constructor",
+"Main",
+"Friend Function"
+],
+answer:"Constructor"
+},
+{
+question:"7. Which OOP feature promotes code reusability?",
+options:[
+"Abstraction",
+"Encapsulation",
+"Inheritance",
+"Function"
+],
+answer:"Inheritance"
+},
+{
+question:"8. An instance of a class is called?",
+options:[
+"Method",
+"Object",
+"Constructor",
+"Package"
+],
+answer:"Object"
+},
+{
+question:"9. Which access specifier allows access from anywhere?",
+options:[
+"private",
+"protected",
+"public",
+"default"
+],
+answer:"public"
+},
+{
+question:"10. Which concept binds data and functions together?",
+options:[
+"Encapsulation",
+"Abstraction",
+"Inheritance",
+"Polymorphism"
+],
+answer:"Encapsulation"
+}
+];
+
+const [current,setCurrent]=React.useState(0);
+const [score,setScore]=React.useState(0);
+const [timer,setTimer]=React.useState(20);
+const [finished,setFinished]=React.useState(false);
+
+React.useEffect(()=>{
+
+if(finished) return;
+
+if(timer===0){
+nextQuestion();
+return;
+}
+
+const interval=setInterval(()=>{
+setTimer(t=>t-1);
+},1000);
+
+return ()=>clearInterval(interval);
+
+},[timer,finished]);
+
+function answerQuestion(option){
+
+if(option===questions[current].answer){
+setScore(score+1);
+}
+
+nextQuestion();
+
+}
+
+function nextQuestion(){
+
+if(current===questions.length-1){
+setFinished(true);
+}
+else{
+setCurrent(current+1);
+setTimer(20);
+}
+
+}
+
+function restart(){
+
+setCurrent(0);
+setScore(0);
+setTimer(20);
+setFinished(false);
+
+}
+
+if(finished){
+return(
+<div className="quiz-box result">
+<h1>Quiz Completed</h1>
+<h2>Your Score : {score} / {questions.length}</h2>
+<p>Correct Answers : {score}</p>
+<p>Wrong Answers : {questions.length-score}</p>
+<button onClick={restart}>Restart Quiz</button>
+</div>
+)
+}
+
+return(
+<div className="quiz-box">
+
+<h1>OOPS Quiz</h1>
+
+<div className="info">
+<span>Question {current+1} / {questions.length}</span>
+<span>Time Left : {timer}s</span>
+</div>
+
+<div className="question">
+{questions[current].question}
+</div>
+
+{
+questions[current].options.map((option,index)=>(
+<div
+key={index}
+className="option"
+onClick={()=>answerQuestion(option)}
+>
+{option}
+</div>
+))
+}
+
+</div>
+)
+
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<QuizApp/>);
+
+</script>
+
+</body>
+</html>
