@@ -56,5 +56,26 @@ for( ; ;i=i+2) //different as compare to c++ here condition is optional
 }
 
 
+ var name='java';
+function Example(){
+    var name='JS';
+    if(true){
+        var name="C";
+        console.log(name);
+
+    }
+    console.log(name);
+}
+Example();
+console.log(name);
+
+function start(){
+    for(var i=0;i<5;i++){
+        console.log(i);
+    }
+    console.log(i);
+}
+start();
+
 
 

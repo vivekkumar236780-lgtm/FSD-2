@@ -54,3 +54,14 @@ function tribonacii(y){
 }
 console.log(tribonacii(9));
 
+let g=4,h=0;
+  while(g>=0){
+    g--;
+    h++;
+    if(g==h)
+        continue;
+    else
+        console.log(g,h);
+}
+
+
