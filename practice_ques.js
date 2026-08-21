@@ -64,4 +64,18 @@ let g=4,h=0;
         console.log(g,h);
 }
 
+//objects
+const sym=Symbol('id');
+const person=new Object;
+  person[sym]=123;
+  person.name='JS';
+  console.log(person);
+
+ //objects are mutable
+  let p={
+    name:'A',
+  };
+  p={age:25};
+  p.dept="CSE"
+  console.log(p);
 
