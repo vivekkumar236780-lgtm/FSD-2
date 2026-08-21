@@ -79,3 +79,28 @@ const person=new Object;
   p.dept="CSE"
   console.log(p);
 
+  //object methods
+  const Person={
+    name:'ABC',
+  };
+  Person.greet=function(){
+    console.log('Hello'+this.name);
+  }
+  Person.greet();
+
+  const per={
+    name:'vivek',
+    age:20,
+    laptop:{
+        cpu:'i7',
+        ram:'8GB',
+        brand:'HP',
+    }
+  };
+  console.log(per);
+
+  //accessing methods
+  //data notation
+  per.laptop.cpu;
+  per['laptop']['cpu'];
+  console.log(per.laptop.cpu.length);
