@@ -104,3 +104,36 @@ const person=new Object;
   per.laptop.cpu;
   per['laptop']['cpu'];
   console.log(per.laptop.cpu.length);
+
+  //merging of object
+  const p1={
+    a:1,
+    b:2
+  };
+  const p2={
+    b:3,
+    d:4
+  };
+   //assign operator to merge
+  let res=Object.assign( {},p1,p2);
+  console.log(res);
+  //spread operator to merge
+  let r1={...p1,...p2};
+  console.log(r1);
+
+  //shallow vs deep capy
+
+  const P1={
+    name:'Ankit',
+    laptop : {
+        cpu:'I5',
+        ram:'8GB'
+    }
+  };
+  const P2= structuredClone(P1);  //deep capy
+  P2.laptop.cpu='I7';
+  console.log(P1);
+  console.log(P2);
+  const P3=JSON.parse(JSON.stringify(P1)); //deep capy
+  P3.laptop.ram='16GB';
+  console.log(P3);
