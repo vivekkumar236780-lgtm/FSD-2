@@ -46,3 +46,35 @@ function show(){
     console.log(this);
 }
 show();
+
+//functions
+function display(a,b){
+    return a+b;
+}
+console.log(display(10,20));
+console.log(display());
+console.log(display(10,'a'));
+console.log(display(10,null));
+
+function loggedInUser(user){
+    // if(user===undefined)
+    //     {
+    //     console.log("please provide arguments");
+    // }
+    // return '${user} loggedIn';
+
+      return user === undefined
+        ? "please provide arguments" 
+        : `${user} loggedIn`;
+}
+console.log(loggedInUser());
+console.log(loggedInUser("Vivek"));
+
+
+function dis(x=test()){
+   return(x);
+}
+function test(){
+    return (new Date().toLocaleDateString('en-US'));
+}
+console.log(dis());
